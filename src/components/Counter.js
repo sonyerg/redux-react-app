@@ -1,31 +1,39 @@
 import { useSelector, useDispatch } from "react-redux";
 import classes from "./Counter.module.css";
 import { useState } from "react";
+import { counterActions } from "../store";
 
 const Counter = () => {
   const dispatch = useDispatch();
   const counter = useSelector((state) => state.counter);
+  const showCounter = useSelector((state) => state.showCounter);
   const [userInput, setUserInput] = useState("");
 
   const incrementHandler = () => {
-    dispatch({ type: "increment" });
+    // dispatch({ type: "increment" });
+    dispatch(counterActions.increment());
   };
 
   const decrementHandler = () => {
-    dispatch({ type: "decrement" });
+    // dispatch({ type: "decrement" });
+    dispatch(counterActions.decrement);
   };
 
   const increaseHandler = () => {
-    dispatch({ type: "increase", amount: parseInt(userInput) || 0 });
+    // dispatch({ type: "increase", amount: parseInt(userInput) || 0 });
+    dispatch(counterActions.increase(parseInt(userInput))); // {type: SOME_UNIQUE_IDENTIFIER, payload: userInput}
     setUserInput("");
   };
 
-  const toggleCounterHandler = () => {};
+  const toggleCounterHandler = () => {
+    // dispatch({ type: "toggle" });
+    dispatch(counterActions.toggleCounter());
+  };
 
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{counter}</div>
+      {showCounter && <div className={classes.value}>{counter}</div>}
       <input
         type="number"
         onChange={(e) => setUserInput(e.target.value)}
