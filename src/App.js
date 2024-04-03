@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Auth from "./components/Auth";
 import UserProfile from "./components/UserProfile";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../src/store/index";
+import { authActions } from "../src/store/auth";
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuthenticanted);
@@ -15,7 +15,8 @@ function App() {
     dispatch(authActions.login());
   };
 
-  const logoutHandler = () => {
+  const logoutHandler = (event) => {
+    event.preventDefault();
     dispatch(authActions.logout());
   };
 
