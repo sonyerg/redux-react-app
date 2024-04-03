@@ -5,8 +5,8 @@ import { counterActions } from "../store";
 
 const Counter = () => {
   const dispatch = useDispatch();
-  const counter = useSelector((state) => state.counter);
-  const showCounter = useSelector((state) => state.showCounter);
+  const counter = useSelector((state) => state.counter.counter);
+  const showCounter = useSelector((state) => state.counter.showCounter);
   const [userInput, setUserInput] = useState("");
 
   const incrementHandler = () => {
@@ -21,7 +21,8 @@ const Counter = () => {
 
   const increaseHandler = () => {
     // dispatch({ type: "increase", amount: parseInt(userInput) || 0 });
-    dispatch(counterActions.increase(parseInt(userInput))); // {type: SOME_UNIQUE_IDENTIFIER, payload: userInput}
+    dispatch(counterActions.increase(parseInt(userInput)));
+    // returns: {type: SOME_UNIQUE_IDENTIFIER, payload: userInput}
     setUserInput("");
   };
 
